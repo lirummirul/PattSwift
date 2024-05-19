@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# ============================ MVC ============================
 function touchModel() {
     echo "import Foundation" > Model/Model.swift
     echo "" >> Model/Model.swift
@@ -13,27 +15,157 @@ function touchView() {
     echo "" >> View/View.swift
     echo "class View: UIView {" >> View/View.swift
     echo "" >> View/View.swift
+    echo "    override init(frame: CGRect) {" >> View/View.swift
+    echo "        super.init(frame: frame)" >> View/View.swift
+    echo "        self.setupView()" >> View/View.swift
+    echo "    }" >> View/View.swift
+    echo "" >> View/View.swift
+    echo "    required init?(coder aDecoder: NSCoder) {" >> View/View.swift
+    echo "         super.init(coder: aDecoder)" >> View/View.swift
+    echo "    }" >> View/View.swift
     echo "}" >> View/View.swift
 }
 
-function touchPresenter() {
+function touchController() {
+    echo "import UIKit" > Controller/Controller.swift
+    echo "" >> Controller/Controller.swift
+    echo "class Controller: UIViewController {" >> Controller/Controller.swift
+    echo "    var model: Model!" >> Controller/Controller.swift
+    echo "    var view: View!" >> Controller/Controller.swift
+    echo "" >> Controller/Controller.swift
+    echo "     override func viewDidLoad() {" >> Controller/Controller.swift
+    echo "         super.viewDidLoad()" >> Controller/Controller.swift
+    echo "     }" >> Controller/Controller.swift
+    echo "}" >> Controller/Controller.swift
+}
+
+# ============================ MVVM ============================
+
+function touchViewModel() {
+    echo "import UIKit" > ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "class ViewModel {" >> ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "    init() {" >> ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "    }" >> ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "    deinit {" >> ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "    }" >> ViewModel/ViewModel.swift
+    echo "" >> ViewModel/ViewModel.swift
+    echo "}" >> ViewModel/ViewModel.swift
+}
+
+# ============================ MVP ============================
+
+# function touchPresenterMVP() {
+#     echo "import Foundation" > Presenter/Presenter.swift
+#     echo "" >> Presenter/Presenter.swift
+#     echo "class Presenter {" >> Presenter/Presenter.swift
+#     echo "    weak var view: View?" >> Presenter/Presenter.swift
+#     echo "    var model: Model" >> Presenter/Presenter.swift
+#     echo "" >> Presenter/Presenter.swift
+#     echo "    init(model: Model) {" >> Presenter/Presenter.swift
+#     echo "        self.model = model" >> Presenter/Presenter.swift
+#     echo "    }" >> Presenter/Presenter.swift
+#     echo "" >> Presenter/Presenter.swift
+#     echo "}" >> Presenter/Presenter.swift
+# }
+
+# - Presenter :
+function touchPresenterPresenter() {
     echo "import Foundation" > Presenter/Presenter.swift
     echo "" >> Presenter/Presenter.swift
     echo "class Presenter {" >> Presenter/Presenter.swift
-    echo "    weak var view: View?" >> Presenter/Presenter.swift
-    echo "    var model: Model" >> Presenter/Presenter.swift
+    echo "    weak var view: ViewInput?" >> Presenter/Presenter.swift
     echo "" >> Presenter/Presenter.swift
-    echo "    init(model: Model) {" >> Presenter/Presenter.swift
-    echo "        self.model = model" >> Presenter/Presenter.swift
+    echo "    private let output: ModuleOutput" >> Presenter/Presenter.swift
+    echo "" >> Presenter/Presenter.swift
+    echo "    init(output: ModuleOutput) {" >> Presenter/Presenter.swift
+    echo "        self.output = output" >> Presenter/Presenter.swift
     echo "    }" >> Presenter/Presenter.swift
+    echo "}" >> Presenter/Presenter.swift
+    echo "" >> Presenter/Presenter.swift
+    echo "extension Presenter: ViewOutput {" >> Presenter/Presenter.swift
+    echo "" >> Presenter/Presenter.swift
+    echo "}" >> Presenter/Presenter.swift
+    echo "" >> Presenter/Presenter.swift
+    echo "extension Presenter: ModuleInput {" >> Presenter/Presenter.swift
     echo "" >> Presenter/Presenter.swift
     echo "}" >> Presenter/Presenter.swift
 }
 
+function touchPresenterModuleIO() {
+    echo "import Foundation" > Presenter/ModuleIO.swift
+    echo "" >> Presenter/ModuleIO.swift
+    echo "protocol ModuleInput: AnyObject {" >> Presenter/ModuleIO.swift
+    echo "" >> Presenter/ModuleIO.swift
+    echo "}" >> Presenter/ModuleIO.swift
+    echo "" >> Presenter/ModuleIO.swift
+    echo "protocol ModuleOutput: AnyObject {" >> Presenter/ModuleIO.swift
+    echo "" >> Presenter/ModuleIO.swift
+    echo "}" >> Presenter/ModuleIO.swift
+}
+
+# - View : 
+function touchViewController() {
+    echo "import UIKit" > View/ViewController.swift
+    echo "" >> View/ViewController.swift
+    echo "class ViewController: UIViewController {" >> View/ViewController.swift
+    echo "    private let output: ViewOutput" >> View/ViewController.swift
+    echo "" >> View/ViewController.swift
+    echo "    init(output: ViewOutput) {" >> View/ViewController.swift
+    echo "        self.output = output" >> View/ViewController.swift
+    echo "        super.init(nibName: nil, bundle: nil)" >> View/ViewController.swift
+    echo "    }" >> View/ViewController.swift
+    echo "" >> View/ViewController.swift
+    echo "    required init?(coder: NSCoder) {" >> View/ViewController.swift
+    echo "        fatalError(\"init(coder:) has not been implemented\")" >> View/ViewController.swift
+    echo "    }" >> View/ViewController.swift
+    echo "" >> View/ViewController.swift
+    echo "    override func viewDidLoad() {" >> View/ViewController.swift
+    echo "        super.viewDidLoad()" >> View/ViewController.swift
+    echo "    }" >> View/ViewController.swift
+    echo "" >> View/ViewController.swift
+    echo "}" >> View/ViewController.swift
+}
+
+function touchViewIO() {
+    echo "import Foundation" > View/ViewIO.swift
+    echo "" >> View/ViewIO.swift
+    echo "protocol ViewInput: AnyObject {" >> View/ViewIO.swift
+    echo "" >> View/ViewIO.swift
+    echo "}" >> View/ViewIO.swift
+    echo "" >> View/ViewIO.swift
+    echo "protocol ViewOutput: AnyObject {" >> View/ViewIO.swift
+    echo "" >> View/ViewIO.swift
+    echo "}" >> View/ViewIO.swift
+}
+
+# - ModuleBuilder.swift
+function touchModuleBuilder() {
+    echo "import Foundation" > ModuleBuilder.swift
+    echo "" >> ModuleBuilder.swift
+    echo "class ModuleBuilder {" >> ModuleBuilder.swift
+    echo "" >> ModuleBuilder.swift
+    echo "    func build(output: ModuleOutput) -> UIViewController {" >> ModuleBuilder.swift
+    echo "        let presenter = Presenter(output: output)" >> ModuleBuilder.swift
+    echo "        let viewController = ViewController(output: presenter)" >> ModuleBuilder.swift
+    echo "        presenter.view = view" >> ModuleBuilder.swift
+    echo "        view.presenter = presenter" >> ModuleBuilder.swift
+    echo "        return view" >> ModuleBuilder.swift
+    echo "    }" >> ModuleBuilder.swift
+    echo "" >> ModuleBuilder.swift
+    echo "}" >> ModuleBuilder.swift
+}
+
+# ============================ MVP + Coordinator ============================
+
 function touchCoordinator() {
-    echo "import Foundation" > Coordinator/Coordinator.swift
+    echo "import UIKit" >> Coordinator/Coordinator.swift
     echo "" >> Coordinator/Coordinator.swift
-    echo "class Coordinator: NSObject {" >> Coordinator/Coordinator.swift
+    echo "class Coordinator: CoordinatorProtocol {" >> Coordinator/Coordinator.swift
     echo "    var navigationController: UINavigationController" >> Coordinator/Coordinator.swift
     echo "" >> Coordinator/Coordinator.swift
     echo "    init(navigationController: UINavigationController) {" >> Coordinator/Coordinator.swift
@@ -41,17 +173,30 @@ function touchCoordinator() {
     echo "    }" >> Coordinator/Coordinator.swift
     echo "" >> Coordinator/Coordinator.swift
     echo "    func start() {" >> Coordinator/Coordinator.swift
-    echo "        let view = View()" >> Coordinator/Coordinator.swift
-    echo "        let model = Model()" >> Coordinator/Coordinator.swift
-    echo "        let presenter = Presenter(model: model)" >> Coordinator/Coordinator.swift
-    echo "        presenter.view = view" >> Coordinator/Coordinator.swift
-    echo "        view.presenter = presenter" >> Coordinator/Coordinator.swift
-    echo "        navigationController.pushViewController(view, animated: true)" >> Coordinator/Coordinator.swift
+    echo "        let VC = ModuleBuilder().build(output: self)" >> Coordinator/Coordinator.swift
+    echo "        navigationController.pushViewController(VC, animated: true)" >> Coordinator/Coordinator.swift
     echo "    }" >> Coordinator/Coordinator.swift
     echo "" >> Coordinator/Coordinator.swift
     echo "}" >> Coordinator/Coordinator.swift
 }
 
+function touchCoordinatorProtocol() {
+    echo "import UIKit" >> Coordinator/CoordinatorProtocol.swift
+    echo "" >> Coordinator/CoordinatorProtocol.swift
+    echo "protocol CoordinatorProtocol {" >> Coordinator/CoordinatorProtocol.swift
+    echo "    var navigationController: UINavigationController { get }" >> Coordinator/CoordinatorProtocol.swift
+    echo "}" >> Coordinator/CoordinatorProtocol.swift
+    echo "" >> Coordinator/CoordinatorProtocol.swift
+    echo "protocol Input: AnyObject {" >> Coordinator/CoordinatorProtocol.swift
+    echo "" >> Coordinator/CoordinatorProtocol.swift
+    echo "}" >> Coordinator/CoordinatorProtocol.swift
+    echo "" >> Coordinator/CoordinatorProtocol.swift
+    echo "protocol Output: AnyObject {" >> Coordinator/CoordinatorProtocol.swift
+    echo "" >> Coordinator/CoordinatorProtocol.swift
+    echo "}" >> Coordinator/CoordinatorProtocol.swift
+}
+
+# ============================ VIPER ============================
 function touchInteractor() {
     echo "import Foundation" > Interactor/Interactor.swift
     echo "" >> Interactor/Interactor.swift
@@ -68,6 +213,7 @@ function touchRouter() {
     echo "}" >> Router/Router.swift
 }
 
+# ============================ CLEAN ============================
 function touchEntity() {
     echo "import Foundation" > Entity/Entity.swift
     echo "" >> Entity/Entity.swift
@@ -94,7 +240,7 @@ function touchRepository() {
 
 project_name=$1
 
-if [[ "$project_name" == "mvc" ]]; then
+if [[ "$project_name" == "mvc" ]]; then # success 
     mkdir Model
     mkdir View
     mkdir Controller
@@ -103,40 +249,64 @@ if [[ "$project_name" == "mvc" ]]; then
     touch View/View.swift
     touch Controller/Controller.swift
 
-    touchModel
-    touchView
-    touchController
+    if [[ "$1" != "w" ]]; then # success 
+        touchModel
+        touchView
+        touchController
+    fi
 
     echo "Success: Created $project_name"
-elif [[ "$project_name" == "mvp" ]]; then
+elif [[ "$project_name" == "mvvm" ]]; then # success
     mkdir Model
     mkdir View
-    mkdir Presenter
+    mkdir ViewModel
 
     touch Model/Model.swift
     touch View/View.swift
-    touch Presenter/Presenter.swift
+    touch ViewModel/ViewModel.swift
 
     touchModel
     touchView
-    touchPresenter
+    touchViewModel
 
     echo "Success: Created $project_name"
-elif [[ "$project_name" == "mvp+c" ]]; then
-    mkdir Model
+elif [[ "$project_name" == "mvp" ]]; then # success
+    mkdir View
+    mkdir Presenter
+
+    touch Presenter/Presenter.swift
+    touch Presenter/ModuleIO.swift
+    touch View/ViewController.swift
+    touch View/ViewIO.swift
+    touch ModuleBuilder.swift
+
+    touchPresenterPresenter
+    touchPresenterModuleIO
+    touchViewController
+    touchViewIO
+    touchModuleBuilder
+
+    echo "Success: Created $project_name"
+elif [[ "$project_name" == "mvp+c" ]]; then # success
     mkdir View
     mkdir Presenter
     mkdir Coordinator
 
-    touch Model/Model.swift
-    touch View/View.swift
     touch Presenter/Presenter.swift
+    touch Presenter/ModuleIO.swift
+    touch View/ViewController.swift
+    touch View/ViewIO.swift
     touch Coordinator/Coordinator.swift
+    touch Coordinator/CoordinatorProtocol.swift
+    touch ModuleBuilder.swift
 
-    touchModel
-    touchView
-    touchPresenter
+    touchPresenterPresenter
+    touchPresenterModuleIO
+    touchViewController
+    touchViewIO
+    touchModuleBuilder
     touchCoordinator
+    touchCoordinatorProtocol
 
     echo "Success: Created $project_name"
 elif [[ "$project_name" == "viper" ]]; then
