@@ -240,7 +240,7 @@ create_code=true
 
 project_full_path="$project_path/$project_name"
 
-# Проверяем, присутствует ли флаг -w
+# Проверяем, присутствует ли флаг w
 if [ "$#" -ge 2 ] && [ "$2" == "w" ]; then
     create_code=false
 fi
