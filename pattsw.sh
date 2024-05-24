@@ -238,11 +238,17 @@ project_name=$2
 project_path=$3
 create_code=true
 
-project_full_path="$project_path/$project_name"
+# project_full_path="$project_path/$project_name"
 
 # Проверяем, присутствует ли флаг w
 if [ "$#" -ge 2 ] && [ "$2" == "w" ]; then
     create_code=false
+fi
+
+if [ "$#" -ge 3 ]; then
+    project_full_path="$project_path/$project_name"
+else
+    project_full_path="$PWD/$project_name"
 fi
 
 if [[ "$patt" == "mvc" ]]; then # success 
@@ -253,7 +259,7 @@ if [[ "$patt" == "mvc" ]]; then # success
     touch $project_full_path/Model/Model.swift
     touch $project_full_path/View/View.swift
     touch $project_full_path/Controller/Controller.swift
-    # echo $project_full_path
+    echo $project_full_path
     if $create_code; then
         touchModel
         touchView
