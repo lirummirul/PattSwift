@@ -199,6 +199,14 @@ function touchRouter() {
     echo "}" >> $project_full_path/Router/Router.swift
 }
 
+function touchPresenter() {
+    echo "import Foundation" > $project_full_path/Router/Router.swift
+    echo "" >> $project_full_path/Router/Router.swift
+    echo "class Presenter {" >> $project_full_path/Router/Router.swift
+    echo "" >> $project_full_path/Router/Router.swift
+    echo "}" >> $project_full_path/Router/Router.swift
+}
+
 # ============================ CLEAN ============================
 function touchEntity() {
     echo "import Foundation" > $project_full_path/Entity/Entity.swift
@@ -223,6 +231,71 @@ function touchRepository() {
     echo "" >> $project_full_path/Repository/Repository.swift
     echo "}" >> $project_full_path/Repository/Repository.swift
 }
+
+function touchDomainEntity() {
+    echo "import Foundation" > $project_full_path/Domain/Entity/Entity.swift
+    echo "" >> $project_full_path/Domain/Entity/Entity.swift
+    echo "class Entity {" >> $project_full_path/Domain/Entity/Entity.swift
+    echo "" >> $project_full_path/Domain/Entity/Entity.swift
+    echo "}" >> $project_full_path/Domain/Entity/Entity.swift
+}
+
+function touchDomainUseCase() {
+    echo "import Foundation" > $project_full_path/Domain/UseCase/UseCase.swift
+    echo "" >> $project_full_path/Domain/UseCase/UseCase.swift
+    echo "class UseCase {" >> $project_full_path/Domain/UseCase/UseCase.swift
+    echo "" >> $project_full_path/Domain/UseCase/UseCase.swift
+    echo "}" >> $project_full_path/Domain/UseCase/UseCase.swift
+}
+
+function touchDomainRepository() {
+    echo "import Foundation" > $project_full_path/Domain/Repository/Repository.swift
+    echo "" >> $project_full_path/Domain/Repository/Repository.swift
+    echo "class Repository {" >> $project_full_path/Domain/Repository/Repository.swift
+    echo "" >> $project_full_path/Domain/Repository/Repository.swift
+    echo "}" >> $project_full_path/Domain/Repository/Repository.swift
+}
+
+function touchDataRepository() {
+    echo "import Foundation" > $project_full_path/Data/Repository/Repository.swift
+    echo "" >> $project_full_path/Data/Repository/Repository.swift
+    echo "class Repository {" >> $project_full_path/Data/Repository/Repository.swift
+    echo "" >> $project_full_path/Data/Repository/Repository.swift
+    echo "}" >> $project_full_path/Data/Repository/Repository.swift
+}
+
+function touchPresentationView() {
+    echo "import Foundation" > $project_full_path/Presentation/View/View.swift
+    echo "" >> $project_full_path/Presentation/View/View.swift
+    echo "class View {" >> $project_full_path/Presentation/View/View.swift
+    echo "" >> $project_full_path/Presentation/View/View.swift
+    echo "}" >> $project_full_path/Presentation/View/View.swift
+}
+
+function touchPresentationPresenter() {
+    echo "import Foundation" > $project_full_path/Presentation/Presenter/Presenter.swift
+    echo "" >> $project_full_path/Presentation/Presenter/Presenter.swift
+    echo "class Presenter {" >> $project_full_path/Presentation/Presenter/Presenter.swift
+    echo "" >> $project_full_path/Presentation/Presenter/Presenter.swift
+    echo "}" >> $project_full_path/Presentation/Presenter/Presenter.swift
+}
+
+function touchPresentationInteractor() {
+    echo "import Foundation" > $project_full_path/Presentation/Interactor/Interactor.swift
+    echo "" >> $project_full_path/Presentation/Interactor/Interactor.swift
+    echo "class Interactor {" >> $project_full_path/Presentation/Interactor/Interactor.swift
+    echo "" >> $project_full_path/Presentation/Interactor/Interactor.swift
+    echo "}" >> $project_full_path/Presentation/Interactor/Interactor.swift
+}
+
+function touchPresentationRouter() {
+    echo "import Foundation" > $project_full_path/Presentation/Router/Router.swift
+    echo "" >> $project_full_path/Presentation/Router/Router.swift
+    echo "class Router {" >> $project_full_path/Presentation/Router/Router.swift
+    echo "" >> $project_full_path/Presentation/Router/Router.swift
+    echo "}" >> $project_full_path/Presentation/Router/Router.swift
+}
+
 
 # ============================ BASE FILE ============================
 function touchBaseFile() {
